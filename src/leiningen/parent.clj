@@ -49,11 +49,6 @@
   (let [resolved-parent-artifact (first (aether/resolve-artifacts :coordinates [coords]))
         artifact-jar (:file (meta resolved-parent-artifact))
         artifact-zip (ZipFile. artifact-jar)]
-    (println "parent artifact jar:" artifact-jar)
-    ;(println "project.clj entry:" (slurp (.getInputStream
-    ;                                      artifact-zip
-    ;                                      (.getEntry artifact-zip "project.clj"))))
-
     (project/init-project (project/read (InputStreamReader. (.getInputStream
                                           artifact-zip
                                           (.getEntry artifact-zip "project.clj")))))))
